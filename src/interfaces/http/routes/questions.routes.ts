@@ -8,6 +8,7 @@ import {
   voteSchema,
   questionIdSchema,
 } from "../validations/questions.validations";
+import { commentBodySchema } from "../validations/comments.validations";
 
 const router = Router();
 
@@ -23,11 +24,25 @@ router.get(
   questionsController.getById,
 );
 
+router.get(
+  "/:id/comments",
+  validate(questionIdSchema, "params"),
+  questionsController.getComments,
+);
+
 router.post(
   "/",
   authenticate,
   validate(createQuestionSchema),
   questionsController.create,
+);
+
+router.post(
+  "/:id/comments",
+  authenticate,
+  validate(questionIdSchema, "params"),
+  validate(commentBodySchema),
+  questionsController.createComment,
 );
 
 router.post(

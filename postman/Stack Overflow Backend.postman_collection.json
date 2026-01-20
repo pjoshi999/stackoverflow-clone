@@ -43,15 +43,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/v1/auth/register",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "v1",
-                "auth",
-                "register"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "auth", "register"]
             }
           },
           "response": []
@@ -88,15 +81,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/v1/auth/login",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "v1",
-                "auth",
-                "login"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "auth", "login"]
             }
           },
           "response": []
@@ -133,13 +119,8 @@
             },
             "url": {
               "raw": "{{URL}}/auth/refresh",
-              "host": [
-                "{{URL}}"
-              ],
-              "path": [
-                "auth",
-                "refresh"
-              ]
+              "host": ["{{URL}}"],
+              "path": ["auth", "refresh"]
             }
           },
           "response": []
@@ -150,20 +131,71 @@
       "name": "Questions",
       "item": [
         {
+          "name": "Get Question Comments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/questions/:id/comments",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "questions", ":id", "comments"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Question Comment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"body\": \"This is a nested comment via POST.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/questions/:id/comments",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "questions", ":id", "comments"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "List Questions",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/v1/questions?page=1&limit=20&q=javascript&tags=react",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "v1",
-                "questions"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "questions"],
               "query": [
                 {
                   "key": "page",
@@ -193,14 +225,8 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/questions/:id",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "questions",
-                ":id"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "questions", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -237,14 +263,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/v1/questions",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "v1",
-                "questions"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "questions"]
             }
           },
           "response": []
@@ -275,15 +295,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/questions/:id/vote",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "questions",
-                ":id",
-                "vote"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "questions", ":id", "vote"],
               "variable": [
                 {
                   "key": "id",
@@ -325,13 +338,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/answers",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "answers"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "answers"]
             }
           },
           "response": []
@@ -362,15 +370,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/answers/:id/vote",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "answers",
-                ":id",
-                "vote"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "answers", ":id", "vote"],
               "variable": [
                 {
                   "key": "id",
@@ -411,13 +412,31 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/api/comments",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "comments"
+              "raw": "{{baseUrl}}/api/v1/comments",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "comments"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Comments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/comments?commentable_type=question&commentable_id=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "comments"],
+              "query": [
+                {
+                  "key": "commentable_type",
+                  "value": "question"
+                },
+                {
+                  "key": "commentable_id",
+                  "value": "1"
+                }
               ]
             }
           },
@@ -435,14 +454,8 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/users/top",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "users",
-                "top"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "top"]
             }
           },
           "response": []
@@ -454,14 +467,8 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/users/:id",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "users",
-                ":id"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -481,12 +488,8 @@
         "header": [],
         "url": {
           "raw": "{{baseUrl}}/health",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "health"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
         }
       },
       "response": []
@@ -509,9 +512,7 @@
         "type": "text/javascript",
         "packages": {},
         "requests": {},
-        "exec": [
-          ""
-        ]
+        "exec": [""]
       }
     },
     {
@@ -520,9 +521,7 @@
         "type": "text/javascript",
         "packages": {},
         "requests": {},
-        "exec": [
-          ""
-        ]
+        "exec": [""]
       }
     }
   ],

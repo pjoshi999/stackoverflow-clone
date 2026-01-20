@@ -3,13 +3,16 @@ import { z } from "zod";
 /**
  * Validation schema for creating a comment
  */
-export const createCommentSchema = z.object({
-  commentable_type: z.enum(["question", "answer"]),
-  commentable_id: z.number().int().positive(),
+export const commentBodySchema = z.object({
   body: z
     .string()
     .min(5, "Comment must be at least 5 characters")
     .max(600, "Comment must not exceed 600 characters"),
+});
+
+export const createCommentSchema = commentBodySchema.extend({
+  commentable_type: z.enum(["question", "answer"]),
+  commentable_id: z.number().int().positive(),
 });
 
 /**

@@ -13,6 +13,7 @@ router.post(
   commentsController.create,
 );
 
+router.get("/", commentsController.list);
 router.get("/:id", commentsController.getComment);
 
 export default router;

@@ -15,3 +15,8 @@ export interface CreateCommentDTO {
   commentable_id: number;
   body: string;
 }
+
+export interface CommentWithUser extends Comment {
+  username: string;
+  user_reputation: number;
+}

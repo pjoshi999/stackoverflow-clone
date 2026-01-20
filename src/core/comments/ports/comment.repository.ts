@@ -2,6 +2,7 @@ import pool from "../../../infrastructure/db/db";
 import { cacheInvalidatePattern } from "../../../infrastructure/cache";
 import {
   Comment,
+  CommentWithUser,
   CommentableType,
   CreateCommentDTO,
 } from "../domain/comment.interface";
@@ -32,9 +33,15 @@ export const createComment = async (
 export const findCommentsByCommentable = async (
   commentableType: CommentableType,
   commentableId: number,
-): Promise<Comment[]> => {
-  const result = await pool.query<Comment>(
-    "SELECT * FROM comments WHERE commentable_type = $1 AND commentable_id = $2 ORDER BY created_at ASC",
+): Promise<CommentWithUser[]> => {
+  const result = await pool.query<CommentWithUser>(
+    `
+    SELECT c.*, u.username, u.reputation as user_reputation
+    FROM comments c
+    JOIN users u ON c.user_id = u.id
+    WHERE c.commentable_type = $1 AND c.commentable_id = $2
+    ORDER BY c.created_at ASC
+    `,
     [commentableType, commentableId],
   );
   return result.rows;
