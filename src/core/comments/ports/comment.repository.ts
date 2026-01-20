@@ -39,3 +39,11 @@ export const findCommentsByCommentable = async (
   );
   return result.rows;
 };
+
+export const findCommentById = async (id: number): Promise<Comment | null> => {
+  const result = await pool.query<Comment>(
+    "SELECT * FROM comments WHERE id = $1",
+    [id],
+  );
+  return result.rows[0] || null;
+};

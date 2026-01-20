@@ -1,5 +1,5 @@
 import { Pool, PoolConfig } from "pg";
-import { dbConfig } from "../../config/env";
+import { dbConfig, appConfig } from "../../config/env";
 
 const poolConfig: PoolConfig = {
   host: dbConfig.host,
@@ -8,9 +8,11 @@ const poolConfig: PoolConfig = {
   user: dbConfig.user,
   password: dbConfig.password,
 
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  ssl: appConfig.isProduction
+    ? {
+        rejectUnauthorized: false,
+      }
+    : undefined,
 
   max: 20,
   idleTimeoutMillis: 30000,
